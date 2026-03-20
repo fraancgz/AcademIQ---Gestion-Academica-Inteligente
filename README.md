@@ -86,8 +86,8 @@ Está enfocado en:
 ### 1. Clonar el repositorio
 
 ```bash
-git clone https://github.com/tu-usuario/nombre-del-repo.git
-cd nombre-del-repo
+git clone https://github.com/fraancgz/modulo6-node_express.git
+cd modulo6-node_express
 ```
 
 ### 2. Instalar dependencias
