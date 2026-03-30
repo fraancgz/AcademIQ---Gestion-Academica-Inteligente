@@ -3,8 +3,9 @@ import appRoutes from './routes/appRoutes.js'
 import path from 'path'
 import {engine} from 'express-handlebars'
 import {PORT, ROOT_PATH} from './config/index.js'
+import db from './config/db.js'
 
-// El import de dotenv está en el archivo de index de Config
+// El import de dotenv está en el archivo index de Config
 
 // Express
 const app = express()
@@ -20,6 +21,16 @@ app.engine('hbs', engine({
 app.set('view engine', 'hbs') // Lo establece como motor por defecto
 app.set('views', path.join(ROOT_PATH, 'src','views')) // Indica la ruta de las vistas
 
+// Sincronizar la base de datos
+const connectDB = async() => {
+    try {
+        await db.sync()
+        console.log('Base de datos conectada')
+    } catch (error) {
+        console.log(error)
+    }
+}
+connectDB()
 
 // Routes
 app.use('/', appRoutes)
