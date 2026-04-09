@@ -1,12 +1,13 @@
-# 🚀 Backend Core - Node & Express
+# 🎓 AcademIQ - Gestión Académica Inteligente
 
 ![Node](https://img.shields.io/badge/Node.js-18+-green)
 ![Express](https://img.shields.io/badge/Express-4.x-lightgrey)
-![License](https://img.shields.io/badge/License-MIT-blue)
-![Status](https://img.shields.io/badge/Status-En%20desarrollo-orange)
+![Status](https://img.shields.io/badge/Status-En%20Desarrollo-orange)
+![Category](https://img.shields.io/badge/Focus-Productividad_Docente-blue)
 
-> 🧠 Base backend escalable para sistemas de administración.  
-Diseñado con arquitectura modular, buenas prácticas y preparado para crecer con autenticación, base de datos y lógica de negocio.
+> **Optimiza tu tiempo, potencia tu enseñanza.**
+> 
+> **AcademIQ** es una solución integral diseñada para que los profesores retomen el control de su agenda. Automatiza la gestión de actividades y obtén métricas claras sobre tu carga laboral.
 
 ---
 
@@ -26,38 +27,36 @@ Diseñado con arquitectura modular, buenas prácticas y preparado para crecer co
 
 ---
 
-## 📌 Descripción
+## 📌 Descripción del Proyecto
 
-Este proyecto representa el **núcleo backend** de un sistema administrativo moderno.  
+AcademIQ es un **asistente de productividad** diseñado para ayudar a los docentes a optimizar sus tiempos de desarrollo y elaboración de material pedagógico. El sistema no solo organiza, sino que cuantifica el esfuerzo requerido para cada tarea.
 
-Está enfocado en:
-
-- Escalabilidad  
-- Separación de responsabilidades  
-- Mantenibilidad del código  
-- Preparación para futuras integraciones (DB, auth, APIs externas)  
+### ✨ Funcionalidades Principales
+* **Gestión de Actividades:** Elaboración simplificada de tareas, pruebas y trabajos prácticos.
+* **Estimación Inteligente de Tiempos:** El sistema entrega mensajes predictivos sobre cuánto tiempo real requiere finalizar cada actividad según su complejidad.
+* **Calendario de Carga Docente:** Visualización tipo calendario para monitorear plazos de entrega y evitar la saturación de actividades en períodos críticos.
 
 ---
 
 ## 🛠️ Stack Tecnológico
 
-| Tecnología   | Descripción |
-|--------------|------------|
-| Node.js      | Entorno de ejecución para JavaScript |
-| Express      | Framework backend minimalista |
-| Dotenv       | Manejo seguro de variables de entorno |
-| Nodemon      | Hot reload en desarrollo |
-| Bootstrap 5  | UI rápida y responsive |
+| Tecnología | Propósito |
+| :--- | :--- |
+| **Node.js** | Entorno de ejecución para el servidor. |
+| **Express** | Framework para la gestión de rutas y middleware. |
+| **Sequelize** | ORM para la persistencia de datos (PostgreSQL). |
+| **Handlebars** | Motor de plantillas dinámicas para la interfaz. |
+| **Postgres** | Base de datos relacional robusta para asegurar la integridad de la data académica. |
 
 ---
 
 ## ✨ Features
 
-- ✔ Servidor Express configurado  
-- ✔ Arquitectura modular con `Router`  
-- ✔ Endpoint `/status` para health check  
-- ✔ Manejo de archivos estáticos (`/public`)  
-- ✔ Sistema básico de logs en `.txt`  
+- [x] **Servidor Express:** Configuración robusta y optimizada para alto rendimiento.
+- [x] **Arquitectura Modular:** Estructura basada en `Router` para una escalabilidad limpia del backend.
+- [x] **Health Check:** Endpoint `/status` implementado para monitoreo del estado del servidor.
+- [x] **Gestión de Estáticos:** Manejo eficiente de archivos en la carpeta `/public`.
+- [ ] **Módulo de Tiempos:** Algoritmo de estimación de carga horaria (En desarrollo).
 
 ---
 
@@ -65,14 +64,17 @@ Está enfocado en:
 
 ```bash
 .
-├── public/              # Archivos estáticos (HTML, CSS, JS)
 ├── src/
-        ├── controllers/ # Maneja lógica de negocio
-        ├── routes/      # Rutas de la API
-        ├── middlewares/ # Verifica condiciones y prepara datos          
-        ├── data/        # Archivo de datos
+        ├── config/          # Configuración de DB (Sequelize) y variables de entorno
+        ├── controllers/     # Lógica de negocio y manejo de peticiones
+        ├── data/            # Almacenamiento local, logs (.txt) y semillas de datos
+        ├── helpers/         # Funciones de utilidad y helpers para Handlebars
+        ├── middlewares/     # Funciones de validación, seguridad y control de sesión
+        ├── models/          # Definición de esquemas y modelos de Sequelize (Postgres)
+        ├── public/          # Archivos estáticos (CSS, JS, Imágenes)
+        ├── routes/          # Definición de los puntos de entrada (endpoints)
+        ├── views/           # Plantillas de interfaz de usuario (.hbs)
        
-├── logs/                # Archivos de registro del servidor
 ├── .env                 # Variables de entorno
 ├── .gitignore
 ├── package.json
@@ -100,11 +102,21 @@ npm install
 
 ## 🌱 Variables de Entorno
 
-Crea un archivo `.env` en la raíz:
+> [!IMPORTANT]
+> **AcademIQ** requiere una instancia de **PostgreSQL** activa para funcionar. Sin la base de datos configurada, la aplicación no podrá gestionar sesiones ni persistir actividades.
 
-```env
-PORT=3005
-```
+### Pasos para la Base de Datos:
+1. **Creación:** Debes crear una base de datos manualmente (vía psql o pgAdmin) llamada `academiq_db` (o el nombre que prefieras).
+2. **Variables de Entorno:** Crea un archivo `.env` en la raíz del proyecto y configura tus credenciales:
+   ```env
+   PORT=3000
+
+   DB_NAME=tu_base_de_datos
+   DB_USER=tu_usuario
+   DB_PASSWORD=tu_contraseña
+   DB_HOST=127.0.0.1
+   DB_DIALECT=postgres
+   SESSION_SECRET=un_secreto_seguro
 
 ---
 
@@ -144,8 +156,8 @@ PORT=3005
 ## 🗺️ Roadmap
 
 - [x] Fase 1: Arquitectura base + rutas + middlewares 🚧 En desarrollo   
-- [ ] Fase 2: Base de datos + CRUD de productos  
-- [ ] Fase 3: Autenticación (JWT) + usuarios  
+- [x] Fase 2: Base de datos + CRUD de productos  
+- [x] Fase 3: Autenticación (JWT) + usuarios (Por ahora sin JWT - Uso de express-session)  
 - [ ] Fase 4: Roles y permisos  
 - [ ] Fase 5: Tests + documentación API  
 

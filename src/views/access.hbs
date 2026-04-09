@@ -1,0 +1,97 @@
+<main class="container d-flex align-items-center justify-content-center vh-100">
+    <div id="auth-container" class="row">
+        <div class="col-12 col-md-6 d-flex flex-column justify-content-center p-5 auth-form" id="loginSection">
+            <h2 class="fw-bold mb-4 text-primary">Iniciar Sesión</h2>
+            <form id="loginForm" method="POST">
+                <div class="input-group mb-3">
+                    <span class="input-group-text bg-white"><i class="bi bi-envelope"></i></span>
+                    <div class="form-floating">
+                        <input type="email" class="form-control border-start-0" value="user@gmail.com" id="loginMail" name="mail"
+                            placeholder="Email" minlength="5" required>
+                        <label for="loginMail">Correo electrónico</label>
+                    </div>
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text bg-white"><i class="bi bi-lock"></i></span>
+                    <div class="form-floating">
+                        <input type="password" class="form-control border-start-0 pass" value="123456" id="loginPass" name="pass"
+                            placeholder="••••••••" required>
+                        <label for="loginPass">Contraseña</label>
+                    </div>
+                </div>
+                <button type="submit" id="btnLogin" class="btn btn-primary w-100 shadow-sm py-2 mb-3">Ingresar</button>
+
+                <div class="text-center mb-3">
+                    <small>¿No tienes cuenta? <a href="#" id="go-to-register"
+                            class="text-decoration-none fw-bold">Regístrate</a></small>
+                </div>
+
+                <div class="alert alert-dismissible fade show d-none text-center" id="alertLogin" role="alert">
+                    <i class="bi bi-exclamation-circle me-3 fs-3"></i><small id="textLogin"></small>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-12 col-md-6 d-none d-md-flex flex-column justify-content-center p-5 auth-form "
+            id="registerSection">
+            <h2 class="fw-bold mb-4 text-success">Crear Cuenta</h2>
+            <form id="registerForm">
+                <div class="input-group mb-3">
+                    <span class="input-group-text bg-white "><i class="bi bi-person"></i></span>
+                    <div class="form-floating">
+                        <input type="text" class="form-control border-start-0" value="user" id="username" name="username"
+                            placeholder="" minlength="3" required autocomplete="username">
+                        <label for="username">Nombre Completo</label>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text bg-white"><i class="bi bi-envelope"></i></span>
+                    <div class="form-floating">
+                        <input type="email" class="form-control border-start-0" value="user@gmail.com" id="mail" name="mail" placeholder=""
+                            minlength="5" required>
+                        <label for="mail">Correo Electrónico</label>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text bg-white"><i class="bi bi-lock"></i></span>
+                    <div class="form-floating">
+                        <input type="password" class="form-control border-start-0" value="123456" id="pass" name="pass" placeholder=""
+                            required>
+                        <label for="pass">Contraseña</label>
+                    </div>
+                </div>
+                <button type="submit" id="btnRegister" class="btn btn-success w-100 py-2 mb-3">Registrarse</button>
+
+                <div class="text-center mb-3">
+                    <small>¿Ya tienes cuenta? <a href="#" id="go-to-login"
+                            class="text-decoration-none text-success fw-bold">Inicia Sesión</a></small>
+                </div>
+
+                <div class="alert alert-dismissible fade show d-none text-center" id="alertRegister" role="alert">
+                    <i class="bi bi-person-check me-3 fs-3"></i><small id="textRegister"></small>
+                </div>
+            </form>
+        </div>
+
+        <div
+            class="col-6 col-md-6 d-none d-md-flex flex-column justify-content-center align-items-center bg-primary-custom text-white p-5 text-center sliding-panel">
+            <i class="bi-mortarboard display-1 mb-3" style="opacity: 0.9;"></i>
+
+            <h2 class="fw-bold display-6">AcademIQ</h2>
+            <hr class="w-25 border-2 mb-4" style="opacity: 0.5;">
+            <p class="lead px-3">Potenciando la gestión educativa con análisis inteligente.</p>
+
+            <span class="badge rounded-pill bg-white text-primary px-3 py-2 mt-3 shadow-sm">
+                <i class="bi bi-shield-lock-fill me-1"></i> Portal Administrativo
+            </span>
+        </div>
+    </div>
+</main>
+
+
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>

@@ -1,11 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/css/main.css">
+    
     <title>{{pageTitle}}</title>
 </head>
+
 <body>
-    {{{body}}}
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="/activities" class="navbar-brand">📝 Planificador Académico</a>
+
+            <ul class="navbar-menu">
+                <li>
+                    <a href="/activities" class="nav-link {{#if isActivity}}active{{/if}}">
+                        <i class="fas fa-calendar-alt"></i> Agenda Académica
+                    </a>
+                </li>
+                <li>
+                    <a href="/courses" class="nav-link {{#if isCourse}}active{{/if}}">
+                        <i class="fas fa-chalkboard"></i> Mis Cursos
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/subjects" class="nav-link {{#if isSubject}}active{{/if}}">
+                        <i class="fas fa-book"></i> Asignaturas
+                    </a>
+                </li>
+                <li>
+                    <a href="/profile" class="nav-link {{#if isProfile}}active{{/if}}">
+                        <i class="fas fa-user-circle"></i> Mi Perfil
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        {{{body}}}
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p><strong>Planificador Académico v1.0</strong> | Gestión Eficiente para la Comunidad Educativa</p>
+            <p>Desarrollado por <strong>@fraan_cgz</strong> | Talento Digital & SENCE | 2026</p>
+        </div>
+    </footer>
+    
+    <script src="/js/main.js"></script>
 </body>
+
 </html>

@@ -1,0 +1,28 @@
+<div class="container slim-container">
+    <div class="profile-card">
+        {{!-- Círculo con Inicial --}}
+        <div class="profile-avatar-circle">
+            <span>FC</span> 
+        </div>
+
+        <div class="profile-info">
+            <h1 class="welcome-text">¡Hola, {{firstName}}!</h1>
+            <p class="app-tag">Panel de Gestión AcademIQ</p>
+        </div>
+
+        <div class="profile-actions">
+            {{!-- Botón de Logout Destacado --}}
+            <a href="/profile/logout" class="btn-logout-minimal">
+                <span class="material-icons">power_settings_new</span>
+                Cerrar Sesión
+            </a>
+        </div>
+
+        <div class="profile-footer">
+            <a href="/courses" class="link-nav-simple">
+                <span class="material-icons">grid_view</span>
+                Volver a mis Cursos
+            </a>
+        </div>
+    </div>
+</div>

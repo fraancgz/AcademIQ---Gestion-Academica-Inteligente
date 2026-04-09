@@ -1,0 +1,11 @@
+{{#if message}}
+<div id="custom-alert" class="alert-box {{#if ok}}is-success{{else}}is-error{{/if}} js-auto-close">
+    <div class="alert-content">
+        <span class="material-icons">
+            {{#if ok}}check_circle{{else}}error_outline{{/if}}
+        </span>
+        <p class="alert-message">{{message}}</p>
+    </div>
+    <button type="button" class="alert-close-btn" onclick="this.parentElement.remove()">×</button>
+</div>
+{{/if}}

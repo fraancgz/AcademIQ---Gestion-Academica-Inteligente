@@ -1,0 +1,41 @@
+<div class="container slim-container">
+    {{!-- getFormName decidirá si dice "Crear Curso" o "Editar Curso" según el ID --}}
+    <h1>{{#if isEdit}} Editar {{else}} Crear {{/if}}</h1>
+
+
+    <form action="{{getFormAction course.id 'courses'}}" method="POST" class="custom-form">
+        
+        <div class="form-group">
+            <label for="level">Nivel Académico</label>
+            <input type="text" id="level" name="level" value="{{course.level}}" 
+                   placeholder="Ej. 1° Básico, 2do Medio..." required>
+        </div>
+
+        <div class="form-group">
+            <label for="letter">Letra / Paralelo</label>
+            <input type="text" id="letter" name="letter" value="{{course.letter}}" 
+                   placeholder="Ej. A" maxlength="1" required>
+            <small class="form-help">Solo un carácter (A, B, C...)</small>
+        </div>
+
+
+        <button type="submit" class="btn btn-form">🚀 {{getFormName course.id}}</button>
+
+        {{> alert}}
+    </form>
+
+    <div class="form-footer-actions">
+        <a href="/activities" class="link-nav">
+            ← Volver al Inicio
+        </a>
+
+        <a href="/courses" class="link-nav">
+            Ver lista de cursos →
+        </a>
+    </div>
+</div>
+
+{{!-- 
+    Si necesitas crear niveles o categorías dinámicamente, 
+    puedes mantener el modal aquí abajo 
+--}}

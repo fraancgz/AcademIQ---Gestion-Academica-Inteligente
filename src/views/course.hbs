@@ -1,0 +1,70 @@
+<div class="container">
+    <header class="header-section">
+        <div class="action-bar">
+            <a href="/courses/create" class="btn btn-purple">
+                <i class="fas fa-plus"></i> Registrar Nuevo Curso
+            </a>
+        </div>
+    </header>
+
+    {{#if courses}}
+    <div class="course-grid">
+        {{#each courses}}
+        <article class="course-card">
+            <div class="card-sidebar-gradient">
+                <span class="category-name-micro">{{this.level}}</span>
+                <div class="category-icon-wrapper">
+                    {{#if (isMedia this.level)}} 🏛️ {{else}} 🏫 {{/if}}
+                </div>
+            </div>
+
+            <div class="card-main-content">
+                <div class="content-body">
+                    <h2 class="course-title-pro">{{this.level}} {{this.letter}}</h2>
+
+                    <p class="course-info">
+                        <i class="fas fa-book"></i> Asignaturas vinculadas:
+                        <strong>{{this.Subjects.length}}</strong>
+                    </p>
+
+                    <p class="course-description">
+                        Este curso cuenta con planificación activa para el periodo 2026.
+                    </p>
+                </div>
+
+                <footer class="card-pro-footer-row">
+                    <div class="status-tag">
+                        <span class="status-indicator {{#if this.active}}online{{/if}}"></span>
+                        <span class="status-text">Activo</span>
+                    </div>
+
+                    <div class="admin-actions-compact">
+
+                        <a href="/courses/{{this.id}}/edit" class="btn-minimal-icon btn-edit" title="Editar curso">
+                            <i class="fas fa-edit"></i>
+                        </a>
+
+                        <form action="/courses/{{this.id}}/delete" method="POST" style="display:inline;">
+                            <button type="submit" class="btn-minimal-icon btn-delete" title="Eliminar curso"
+                                onclick="return confirm('¿Estás seguro de eliminar este curso? Se perderán las asignaturas asociadas.')">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </form>
+                    </div>
+                </footer>
+            </div>
+        </article>
+        {{/each}}
+    </div>
+    {{else}}
+    <div class="empty-state-container">
+        <div class="no-courses-message">
+            <div class="icon">📁</div>
+            <h3>No tienes cursos asignados</h3>
+            <p style="margin-bottom: 15px;">Para comenzar a planificar, primero debes registrar tus cursos y niveles.
+            </p>
+            <a href="/courses/create" class="btn btn-purple">Registrar mi primer curso</a>
+        </div>
+    </div>
+    {{/if}}
+</div>
