@@ -1,0 +1,20 @@
+<div class="nav-user-container" style="position: relative;">
+    <button class="btn-minimal-icon nav-user-trigger" id="userMenuBtn">
+        <div class="nav-avatar-mini">
+            {{getInitials firstName lastName}}
+        </div>
+        <span class="nav-user-name">{{firstName}}</span>
+        <i class="fas fa-chevron-down"></i>
+    </button>
+
+    <div class="nav-dropdown-menu" id="userDropdown">
+
+        <a href="/profile" class="nav-link dropdown-item">
+            <i class="fas fa-user-edit"></i> Mi Perfil
+        </a>
+
+        <a href="/profile/logout" class="nav-link dropdown-item logout-red">
+            <i class="fas fa-power-off"></i> Cerrar Sesión
+        </a>
+    </div>
+</div>

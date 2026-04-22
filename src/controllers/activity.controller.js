@@ -1,4 +1,5 @@
-const activities = (req, res) => {
+
+const activities = async (req, res) => {
 
     return res.render('coming-soon', {
         pageTitle: 'AcademIQ - Actividades',

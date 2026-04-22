@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="/css/main.css">
-    
+
     <title>{{pageTitle}}</title>
 </head>
 
@@ -33,11 +33,10 @@
                         <i class="fas fa-book"></i> Asignaturas
                     </a>
                 </li>
-                <li>
-                    <a href="/profile" class="nav-link {{#if isProfile}}active{{/if}}">
-                        <i class="fas fa-user-circle"></i> Mi Perfil
-                    </a>
+                <li class="nav-user-item">
+                    {{>userMenu}}
                 </li>
+
             </ul>
         </div>
     </nav>
@@ -52,8 +51,9 @@
             <p>Desarrollado por <strong>@fraan_cgz</strong> | Talento Digital & SENCE | 2026</p>
         </div>
     </footer>
-    
+
     <script src="/js/main.js"></script>
+    <script src="/js/dropdown.js"></script>
 </body>
 
 </html>

@@ -19,6 +19,10 @@ const isAuth = (req, res, next) => {
         // para que las siguientes rutas puedan saber quién es el usuario
         req.user = decoded
 
+        // Utilizo 'firstName' y 'lastName' guardados en el JWT para que esten disponibles en todos los hbs
+        res.locals.firstName = decoded.firstName || 'N';
+        res.locals.lastName = decoded.lastName || 'N';
+
         next()
     } catch (error) {
         // 5. Si el token expiró o es falso, limpio la cookie y redirijo

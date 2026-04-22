@@ -1,28 +1,51 @@
-<div class="container slim-container">
-    <div class="profile-card">
-        {{!-- Círculo con Inicial --}}
-        <div class="profile-avatar-circle">
-            <span>FC</span> 
-        </div>
+<div class="main-content">
+    <div class="profile-container-centered">
+        <div class="course-grid single-card-grid">
+            <article class="course-card-premium profile-main-card">
+                <div class="card-main-content">
+                    <form action="/profile/update" method="POST" class="profile-form-compact">
+                        <div class="form-header-minimal"
+                            style="margin-bottom: 20px; border-bottom: 1px solid #f1f5f9; padding-bottom: 15px;">
+                            <h2 class="course-title-pro" style="font-size: 1.5rem; margin-bottom: 5px;">{{profile.firstName}}
+                                {{profile.lastName}}</h2>
+                            <span class="course-info" style="font-size: 0.9rem;"><i class="fas fa-envelope"></i>
+                                {{email}}</span>
+                        </div>
 
-        <div class="profile-info">
-            <h1 class="welcome-text">¡Hola, {{firstName}}!</h1>
-            <p class="app-tag">Panel de Gestión AcademIQ</p>
-        </div>
+                        <div class="form-grid-layout">
+                            <div class="form-group">
+                                <label><i class="fas fa-user"></i> Nombre</label>
+                                <input type="text" name="firstName" value="{{profile.firstName}}" required>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-user-tag"></i> Apellido</label>
+                                <input type="text" name="lastName" value="{{profile.lastName}}" required>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-graduation-cap"></i> Especialidad</label>
+                                <input type="text" name="specialty" value="{{profile.specialty}}" placeholder="Ej: Informática" required minlength="3">
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-clock"></i> Horas Semanales</label>
+                                <input type="number" name="maxWeeklyHours" value="{{profile.maxWeeklyHours}}" min="1" max="80" required>
+                            </div>
+                            <div class="form-group full-width">
+                                <label><i class="fas fa-id-card"></i> Biografía Profesional</label>
+                                <textarea name="bio" rows="3"
+                                    placeholder="Cuéntanos un poco sobre tu trayectoria...">{{profile.bio}}</textarea>
+                            </div>
+                        </div>
 
-        <div class="profile-actions">
-            {{!-- Botón de Logout Destacado --}}
-            <a href="/profile/logout" class="btn-logout-minimal">
-                <span class="material-icons">power_settings_new</span>
-                Cerrar Sesión
-            </a>
-        </div>
-
-        <div class="profile-footer">
-            <a href="/courses" class="link-nav-simple">
-                <span class="material-icons">grid_view</span>
-                Volver a mis Cursos
-            </a>
+                        <div class="card-pro-footer-row">
+                            <div class="admin-actions-compact">
+                                <button type="submit" class="btn btn-purple">
+                                    <i class="fas fa-save"></i> Guardar Cambios
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </article>
         </div>
     </div>
 </div>

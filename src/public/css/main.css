@@ -75,6 +75,7 @@ body {
     list-style: none;
     display: flex;
     gap: 25px;
+    align-items: center;
 }
 
 .nav-link {
@@ -114,6 +115,90 @@ body {
     padding: 30px 0;
     margin-top: auto;
 }
+
+/* NAVBAR PROFILE */
+
+/* AVATAR CIRCLE */
+.nav-user-item {
+    display: flex;
+    align-items: center;
+    position: relative; /* Importante para que el dropdown se posicione respecto a este li */
+}
+
+.nav-avatar-mini {
+    width: 32px; 
+    height: 32px; 
+    background: var(--accent-color); 
+    color: white; 
+    border-radius: 50%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    font-weight: bold; 
+    font-size: 0.8rem;
+}
+  
+
+/* Aseguramos que el dropdown sea una lista vertical */
+.nav-dropdown-menu {
+    display: none; 
+    flex-direction: column; /* Esto pone los elementos uno sobre otro */
+    gap: 5px; /* Espacio vertical entre links */
+    position: absolute; 
+    right: 0; 
+    top: 100%; 
+    background: #ffffff; 
+    min-width: 220px; 
+    border-radius: 12px; 
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
+    border: 1px solid #e2e8f0;  
+    z-index: 1100;
+    padding: 15px 20px; /* Un poco más de aire a los lados */
+
+}
+
+.nav-dropdown-menu.show {
+    display: flex !important; /* Cambiamos a flex para que respete column */
+}
+
+
+
+/* SECCION FIRSTNAME Y LASTNAME */
+.dropdown-info {
+    padding: 10px; 
+    border-bottom: 1px solid #eee; 
+    margin-bottom: 5px;
+}
+
+.dropdown-info strong {
+    display: block; 
+    color: var(--primary-color); 
+    font-size: 0.9rem;
+}
+
+.dropdown-info span {
+    font-size: 0.75rem; 
+    color: var(--text-muted);
+}
+
+/* Ajuste para que el avatar no desalinee nada */
+.nav-user-trigger {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    font-family: inherit;
+    color: var(--primary-color);
+    transition: color 0.3s ease;
+}
+
+.nav-user-trigger:hover {
+    color: var(--accent-color);
+}
+
 
 /* =========================================
    4. SISTEMA DE BOTONES
@@ -312,6 +397,7 @@ body {
 .form-group select:focus {
     border-color: var(--accent-color);
 }
+
 
 /* =========================================
    7. ESTADOS VACÍOS
@@ -957,80 +1043,52 @@ textarea {
 /* ------------------------------------------------------------------------------------------------------------- */
 
 
-
-
-.profile-card {
-    background: #ffffff;
-    padding: 40px;
-    border-radius: 20px;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-    margin-top: 4rem;
-}
-
-/* Círculo con inicial (se ve muy pro) */
-.profile-avatar-circle {
-    width: 80px;
-    height: 80px;
-    background: #3b82f6;
-    color: white;
-    border-radius: 50%;
+/* PROFILE */
+/* Contenedor principal de la vista de perfil */
+.profile-container-centered {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 20px;
-    font-size: 2rem;
-    font-weight: bold;
-    text-transform: uppercase;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: flex-start;
+    width: 100%;
+    margin-top: 20px;
 }
 
-.welcome-text {
-    font-size: 2rem;
-    color: #1f2937;
-    margin-bottom: 5px;
+/* Forzamos a que el grid en esta vista tenga un ancho elegante */
+.single-card-grid {
+    width: 100%;
+    max-width: 850px; /* Ancho ideal: ni muy delgado ni que ocupe toda la pantalla */
+    display: block;   /* Anulamos el comportamiento de grid para centrar la tarjeta única */
+    
 }
 
-.app-tag {
-    color: #6b7280;
-    font-size: 0.95rem;
-    margin-bottom: 30px;
+.profile-main-card {
+    width: 100%;
+    min-height: 450px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.08); /* Sombra más profunda para destacar */
+    /* superior, derecha, inferior, izquierda */
+    padding: 10px 40px 10px 40px; 
 }
 
-/* Botón de Logout */
-.btn-logout-minimal {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: #1f2937; /* Negro/Gris oscuro para contraste */
-    color: white;
-    padding: 14px 28px;
-    border-radius: 12px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s ease;
+/* Layout del formulario en 2 columnas */
+.form-grid-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
 }
 
-.btn-logout-minimal:hover {
-    background: #000000;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+.form-grid-layout .full-width {
+    grid-column: span 2;
 }
 
-.profile-footer {
-    margin-top: 40px;
-    border-top: 1px solid #f3f4f6;
-    padding-top: 20px;
-}
-
-.link-nav-simple {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    color: #3b82f6;
-    text-decoration: none;
-    font-weight: 500;
-}
-
-.link-nav-simple:hover {
-    text-decoration: underline;
+/* Responsivo para móviles */
+@media (max-width: 768px) {
+    .form-grid-layout {
+        grid-template-columns: 1fr;
+    }
+    .form-grid-layout .full-width {
+        grid-column: span 1;
+    }
+    .profile-container-centered {
+        padding: 0 15px;
+    }
 }

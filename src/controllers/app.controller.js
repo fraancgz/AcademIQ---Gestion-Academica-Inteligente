@@ -1,10 +1,11 @@
 import { appStatus } from '../config/index.js'
 import User from '../models/user.model.js'
+import Profile from '../models/profile.model.js'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import ms from 'ms'
 
-const SESSION_LIMIT = '5m' // Tiempo limite, tanto para el token como la cookie
+const SESSION_LIMIT = '25m' // Tiempo limite, tanto para el token como la cookie
 
 /**
 * Controlador básico para la ruta raíz.
@@ -84,8 +85,12 @@ const userLogin = async (req, res) => {
             });
         }
 
+        const {firstName = "N", lastName = "N"} = (await Profile.findOne({ where: { userId: user.id } })) || {}
+
+
+
         // Paso de usar session a JWT
-        const token = jwt.sign({ id: user.id, email: user.email}, process.env.JWT_SECRET_KEY, {
+        const token = jwt.sign({ id: user.id, email: user.email, firstName, lastName }, process.env.JWT_SECRET_KEY, {
             expiresIn: SESSION_LIMIT
         })
 
@@ -94,6 +99,7 @@ const userLogin = async (req, res) => {
             httpOnly: true,
             maxAge: ms(SESSION_LIMIT)
         })
+
 
         // Solo mando datos no sensibles
         return res.status(200).json({
