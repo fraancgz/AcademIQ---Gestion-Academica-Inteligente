@@ -9,8 +9,8 @@ router.get('/', isAuth, getCoursesView)
 router.get('/create', isAuth, getCourseForm)
 router.post('/create', isAuth, createCourse)
 
-router.get('/:id/edit', getCourseForm)
-router.post('/:id/edit', createCourse)
+router.get('/:id/edit', isAuth, getCourseForm)
+router.post('/:id/edit', isAuth, createCourse)
 
 router.post('/:id/delete', isAuth, deleteCourse)
 

@@ -1,6 +1,6 @@
 const getProfileView = (req, res) => {
 
-    const firstName = req.session.userName || "Francisco";
+    const firstName = req.user.email || "Usuario";
 
     return res.render('profile', {
         pageTitle: 'Mi Perfil',
@@ -10,9 +10,11 @@ const getProfileView = (req, res) => {
 }
 
 const logout = (req, res) => {
-    req.session.destroy(() => {
-        res.redirect('/auth')
-    })
+    // Borra la cookie del navegador
+    res.clearCookie('token');
+    
+    // Redirige al login o página de autenticación
+    res.redirect('/auth')
 }
 
 export { getProfileView, logout}

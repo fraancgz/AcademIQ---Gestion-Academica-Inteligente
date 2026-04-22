@@ -2,13 +2,13 @@ import { Course } from '../models/index.js'
 
 const getCoursesView = async (req, res) => {
     // Obtengo el ID del profesor desde la sesión
-    const teacherId = req.session.userId;
+    const teacherId = req.user.id
 
     // Busco solo los cursos que le pertenecen a este ID
     const courses = await Course.findAll({
         where: { userId: teacherId },
         raw: true
-    }) || [];
+    }) || []
 
     return res.render('course', {
         pageTitle: 'Cursos',
@@ -47,16 +47,17 @@ const getCourseForm = async (req, res) => {
 }
 
 const createCourse = async (req, res) => {
-    const level = req.body.level?.trim().toLowerCase();
-    const letter = req.body.letter?.trim().toUpperCase();
-    const { id } = req.params; // Viene del router /:id/edit o vacío
+    const level = req.body.level?.trim().toLowerCase()
+    const letter = req.body.letter?.trim().toUpperCase()
+    const { id } = req.params // Viene del router /:id/edit o vacío
 
-    const teacherId = req.session.userId;
-    const course = { level, letter, id }; // Incluimos el id para el helper getFormName
+    console.log(req.user)
+    const teacherId = req.user.id
+    const course = { level, letter, id } // Incluimos el id para el helper getFormName
 
-    // 1. Validación de sesión
+
     if (!teacherId) {
-        return res.redirect('/auth?error=session_expired');
+        return res.redirect('/auth?error=session_expired')
     }
 
     // 2. Validación de campos
@@ -67,7 +68,7 @@ const createCourse = async (req, res) => {
             isEdit: !!id, // Booleano para el H1
             course,
             message: "Por favor, ingresa nivel y letra del curso"
-        });
+        })
     }
 
     try {
@@ -77,13 +78,13 @@ const createCourse = async (req, res) => {
                 level,
                 letter,
                 userId: teacherId
-            });
+            })
         } else {
             // --- MODO EDITAR ---
             const [rowsUpdated] = await Course.update(
                 { level, letter },
                 { where: { id, userId: teacherId } } // Filtro de seguridad
-            );
+            )
 
             if (rowsUpdated === 0) {
                 return res.status(404).render('courseForm', {
@@ -92,18 +93,18 @@ const createCourse = async (req, res) => {
                     isEdit: true,
                     course,
                     message: "No se encontró el curso o no tienes permiso"
-                });
+                })
             }
         }
 
-        return res.redirect('/courses');
+        return res.redirect('/courses')
 
     } catch (error) {
-        console.error("Error en createCourse:", error.message);
+        console.error("Error en createCourse:", error.message)
 
         // Control de duplicados seguro
         const isUniqueError = error.name === 'SequelizeUniqueConstraintError' || 
-                             error.parent?.constraint === 'courses_level_letter_user_id';
+                             error.parent?.constraint === 'courses_level_letter_user_id'
 
         if (isUniqueError) {
             return res.status(400).render('courseForm', {
@@ -113,7 +114,7 @@ const createCourse = async (req, res) => {
                 course,
                 ok: false,
                 message: `${level.toUpperCase()} "${letter}" ya existe en tus registros`
-            });
+            })
         }
 
         return res.status(500).render('courseForm', {
@@ -122,7 +123,7 @@ const createCourse = async (req, res) => {
             isEdit: !!id,
             course,
             message: "Error de conexión con el servidor"
-        });
+        })
     }
 }
 

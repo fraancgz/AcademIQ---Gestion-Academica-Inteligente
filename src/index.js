@@ -1,5 +1,4 @@
 import express from 'express'
-import session from 'express-session';
 import appRoutes from './routes/app.routes.js'
 import activitiesRoutes from './routes/activity.routes.js'
 import coursesRoutes from './routes/course.routes.js'
@@ -10,6 +9,7 @@ import { engine } from 'express-handlebars'
 import { PORT, ROOT_PATH } from './config/index.js'
 import db from './config/db.js'
 import formHelpers from './helpers/form.helper.js'
+import cookieParser from 'cookie-parser'
 
 // El import de dotenv está en el archivo index de Config
 
@@ -19,16 +19,8 @@ const app = express()
 // MiddleWare
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use(session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-        secure: false,
-        httpOnly: true,
-        maxAge: 3600000
-    }
-}))
+
+app.use(cookieParser())
 
 // Configurar el motor de plantillas hbs
 app.engine('hbs', engine({

@@ -1,6 +1,10 @@
 import { appStatus } from '../config/index.js'
 import User from '../models/user.model.js'
 import bcrypt from 'bcryptjs'
+import jwt from 'jsonwebtoken'
+import ms from 'ms'
+
+const SESSION_LIMIT = '5m' // Tiempo limite, tanto para el token como la cookie
 
 /**
 * Controlador básico para la ruta raíz.
@@ -80,8 +84,16 @@ const userLogin = async (req, res) => {
             });
         }
 
-        req.session.userId = user.id;
-        req.session.userName = user.username;
+        // Paso de usar session a JWT
+        const token = jwt.sign({ id: user.id, email: user.email}, process.env.JWT_SECRET_KEY, {
+            expiresIn: SESSION_LIMIT
+        })
+
+        // Creo la cookie
+        res.cookie('token', token, {
+            httpOnly: true,
+            maxAge: ms(SESSION_LIMIT)
+        })
 
         // Solo mando datos no sensibles
         return res.status(200).json({
@@ -89,7 +101,6 @@ const userLogin = async (req, res) => {
             message: "Bienvenido a AcademIQ",
             user: {
                 id: user.id,
-                username: user.username,
                 email: user.email
             },
             redirectUrl: "/activities"
